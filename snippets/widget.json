@@ -1,0 +1,16 @@
+{
+    "ExpandedFadeScrollView": {
+        "prefix": "fadescrollview",
+        "body": [
+            "Expanded(",
+            "\tchild: BottomFadeoutStack(",
+            "\t\tchild: SingleChildScrollView(",
+            "\t\t\tchild: Column(",
+            "\t\t\t\tchildren: [],",
+            "\t\t\t),",
+            "\t\t),",
+            "\t),",
+            "),"
+        ]
+    }
+}
