@@ -1,9 +1,9 @@
 import * as changeCase from "change-case";
 
-export function getViewBarrelTemplate(blocName: string): string {
-    const snakeCaseBlocName = changeCase.snakeCase(blocName);
+export function getViewBarrelTemplate(pageName: string): string {
+    const snakeCasePageName = changeCase.snakeCase(pageName);
 
-    return `export '${snakeCaseBlocName}_page.dart';
-export '${snakeCaseBlocName}_view.dart';
+    return `export '${snakeCasePageName}_page.dart';
+export '${snakeCasePageName}_view.dart';
 `;
 }
