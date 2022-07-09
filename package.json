@@ -1,0 +1,70 @@
+{
+	"name": "flutter-ext",
+	"displayName": "Flutter-Ext",
+	"description": "reduce boilerplate",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.69.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:flutter-ext.helloWorld",
+		"onCommand:flutter-ext.newPage"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/felangel/bloc"
+	},
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "flutter-ext.helloWorld",
+				"title": "Hello World"
+			},
+			{
+				"command": "flutter-ext.newPage",
+				"title": "FlutterExt: New Page"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "flutter-ext.newPage",
+					"when": "explorerResourceIsFolder"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/change-case": "^2.3.1",
+		"@types/glob": "^7.2.0",
+		"@types/lodash": "^4.14.182",
+		"@types/mkdirp": "^0.5.2",
+		"@types/mocha": "^9.1.1",
+		"@types/node": "16.x",
+		"@types/vscode": "^1.69.0",
+		"@typescript-eslint/eslint-plugin": "^5.30.0",
+		"@typescript-eslint/parser": "^5.30.0",
+		"@vscode/test-electron": "^2.1.5",
+		"eslint": "^8.18.0",
+		"glob": "^8.0.3",
+		"mocha": "^10.0.0",
+		"typescript": "^4.7.4"
+	},
+	"dependencies": {
+		"change-case": "^4.1.2",
+		"lodash": "^4.17.19",
+		"mkdirp": "^0.5.1"
+	}
+}
