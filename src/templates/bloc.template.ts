@@ -18,9 +18,12 @@ function getDefaultBlocTemplate(pageName: string): string {
 
   return `import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part '${snakeCasePageName}_event.dart';
 part '${snakeCasePageName}_state.dart';
+
+typedef ${pascalCasePageName}Emit = Emitter<${blocState}>;
 
 class ${bloc} extends Bloc<${blocEvent}, ${blocState}> {
   ${bloc}() : super(const ${blocState}()) {
@@ -40,9 +43,12 @@ function getBaseBlocTemplate(pageName: string): string {
 
   return `import 'package:common_bloc/common_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part '${snakeCasePageName}_event.dart';
 part '${snakeCasePageName}_state.dart';
+
+typedef ${pascalCasePageName}Emit = Emitter<${blocState}>;
 
 class ${bloc} extends BaseBloc<${blocEvent}, ${blocState}> {
   ${bloc}() : super(const ${blocState}()) {
