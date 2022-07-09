@@ -36,7 +36,13 @@
 					"when": "explorerResourceIsFolder"
 				}
 			]
-		}
+		},
+		"snippets": [
+			{
+				"language": "dart",
+				"path": "./snippets/widget.json"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
