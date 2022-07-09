@@ -1,12 +1,14 @@
 import * as changeCase from "change-case";
 
-export function getViewViewTemplate(blocName: string): string {
-    const pascalCaseBlocName = changeCase.pascalCase(blocName);
+export function getViewViewTemplate(pageName: string): string {
+  const pascalCasePageName = changeCase.pascalCase(pageName);
 
-    return `import 'package:flutter/material.dart';
+  const view = `${pascalCasePageName}View`;
 
-class ${pascalCaseBlocName}View extends StatelessWidget {
-  const ${pascalCaseBlocName}View({Key? key}) : super(key: key);
+  return `import 'package:flutter/material.dart';
+
+class ${view} extends StatelessWidget {
+  const ${view}({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

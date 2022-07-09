@@ -18,6 +18,8 @@ export const newPage = async (uri: Uri) => {
         return;
     }
 
+    let isBase = await promptForBlocType();
+
     let targetDirectory;
     if (_.isNil(_.get(uri, "fsPath")) || !lstatSync(uri.fsPath).isDirectory()) {
         targetDirectory = await promptForTargetDirectory();
@@ -29,9 +31,14 @@ export const newPage = async (uri: Uri) => {
         targetDirectory = uri.fsPath;
     }
 
+    const targetDirectoryPath = `${targetDirectory}/${pageName}`;
+    if (!existsSync(targetDirectoryPath)) {
+        await createDirectory(targetDirectoryPath);
+    }
+
     const pascalCaseBlocName = changeCase.pascalCase(pageName);
     try {
-        await generateBlocCode(pageName, targetDirectory);
+        await generateBlocCode(pageName, targetDirectoryPath, isBase);
         window.showInformationMessage(
             `Successfully Generated ${pascalCaseBlocName} Page`
         );
@@ -51,6 +58,11 @@ function promptForPageName(): Thenable<string | undefined> {
     return window.showInputBox(blocNamePromptOptions);
 }
 
+async function promptForBlocType(): Promise<boolean> {
+    const result = await window.showQuickPick(['default bloc', 'base bloc'], { placeHolder: 'select bloc type' });
+    return result === 'base bloc';
+}
+
 async function promptForTargetDirectory(): Promise<string | undefined> {
     const options: OpenDialogOptions = {
         canSelectMany: false,
@@ -68,7 +80,8 @@ async function promptForTargetDirectory(): Promise<string | undefined> {
 
 async function generateBlocCode(
     pageName: string,
-    targetDirectory: string
+    targetDirectory: string,
+    isBase: boolean
 ) {
     const viewDirectoryPath = `${targetDirectory}/view`;
     if (!existsSync(viewDirectoryPath)) {
@@ -84,10 +97,10 @@ async function generateBlocCode(
         createPageBarrelTemplate(pageName, targetDirectory),
         createViewBarrelTemplate(pageName, viewDirectoryPath),
         createViewViewTemplate(pageName, viewDirectoryPath),
-        createViewPageTemplate(pageName, viewDirectoryPath),
+        createViewPageTemplate(pageName, viewDirectoryPath, isBase),
         createBlocEventTemplate(pageName, blocDirectoryPath),
-        createBlocStateTemplate(pageName, blocDirectoryPath),
-        createBlocTemplate(pageName, blocDirectoryPath),
+        createBlocStateTemplate(pageName, blocDirectoryPath, isBase),
+        createBlocTemplate(pageName, blocDirectoryPath, isBase),
     ]);
 }
 
@@ -184,7 +197,8 @@ function createViewViewTemplate(
 
 function createViewPageTemplate(
     pageName: string,
-    targetDirectory: string
+    targetDirectory: string,
+    isBase: boolean
 ) {
     const snakeCaseBlocName = changeCase.snakeCase(pageName);
     const targetPath = `${targetDirectory}/${snakeCaseBlocName}_page.dart`;
@@ -196,7 +210,7 @@ function createViewPageTemplate(
     return new Promise<void>(async (resolve, reject) => {
         writeFile(
             targetPath,
-            getViewPageTemplate(pageName),
+            getViewPageTemplate(pageName, isBase),
             "utf8",
             (error) => {
                 if (error) {
@@ -238,7 +252,8 @@ function createBlocEventTemplate(
 
 function createBlocStateTemplate(
     pageName: string,
-    targetDirectory: string
+    targetDirectory: string,
+    isBase: boolean,
 ) {
     const snakeCaseBlocName = changeCase.snakeCase(pageName);
     const targetPath = `${targetDirectory}/${snakeCaseBlocName}_state.dart`;
@@ -248,7 +263,7 @@ function createBlocStateTemplate(
     return new Promise<void>(async (resolve, reject) => {
         writeFile(
             targetPath,
-            getBlocStateTemplate(pageName),
+            getBlocStateTemplate(pageName, isBase),
             "utf8",
             (error) => {
                 if (error) {
@@ -263,7 +278,8 @@ function createBlocStateTemplate(
 
 function createBlocTemplate(
     blocName: string,
-    targetDirectory: string
+    targetDirectory: string,
+    isBase: boolean
 ) {
     const snakeCaseBlocName = changeCase.snakeCase(blocName);
     const targetPath = `${targetDirectory}/${snakeCaseBlocName}_bloc.dart`;
@@ -271,12 +287,15 @@ function createBlocTemplate(
         throw Error(`${snakeCaseBlocName}_bloc.dart already exists`);
     }
     return new Promise<void>(async (resolve, reject) => {
-        writeFile(targetPath, getBlocTemplate(blocName), "utf8", (error) => {
-            if (error) {
-                reject(error);
-                return;
+        writeFile(targetPath, getBlocTemplate(blocName, isBase),
+            "utf8",
+            (error) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve();
             }
-            resolve();
-        });
+        );
     });
 }
