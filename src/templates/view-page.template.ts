@@ -34,15 +34,15 @@ class ${page} extends StatelessWidget {
       );
 
   static String getRoutePath(BuildContext context) =>
-    '\${GoRouter.of(context).location}/$_routePath';
+      '\${GoRouter.of(context).location}/$_routePath';
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ${bloc}(),
       child: const Scaffold(
-      appBar: TextAppBar(text: 'temp'),
-      body: ${view}(),
+        appBar: TextAppBar(text: 'temp'),
+        body: ${view}(),
       ),
     );
   } 
@@ -79,7 +79,7 @@ class ${page} extends StatelessWidget {
       );
 
   static String getRoutePath(BuildContext context) =>
-    '\${GoRouter.of(context).location}/$_routePath';
+      '\${GoRouter.of(context).location}/$_routePath';
 
   @override
   Widget build(BuildContext context) {

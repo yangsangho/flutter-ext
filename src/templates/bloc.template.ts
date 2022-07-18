@@ -18,7 +18,6 @@ function getDefaultBlocTemplate(pageName: string): string {
 
   return `import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 part '${snakeCasePageName}_event.dart';
 part '${snakeCasePageName}_state.dart';
