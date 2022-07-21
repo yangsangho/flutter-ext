@@ -19,7 +19,7 @@ function getDefaultViewPageTemplate(pageName: string): string {
   return `import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:partners_ui/partners_ui.dart';
+import 'package:pawdly_ui/pawdly_ui.dart';
 
 import '../${snakeCasePageName}.dart';
 
@@ -64,7 +64,7 @@ function getBaseViewPageTemplate(pageName: string): string {
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:partners_ui/partners_ui.dart';
+import 'package:pawdly_ui/pawdly_ui.dart';
 
 import '../${snakeCasePageName}.dart';
 
