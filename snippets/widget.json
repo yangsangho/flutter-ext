@@ -3,7 +3,7 @@
         "prefix": "fadescrollview",
         "body": [
             "Expanded(",
-            "\tchild: BottomFadeoutStack(",
+            "\tchild: FadeoutStack(",
             "\t\tchild: SingleChildScrollView(",
             "\t\t\tchild: Column(",
             "\t\t\t\tchildren: [],",
