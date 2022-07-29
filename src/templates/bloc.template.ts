@@ -51,8 +51,10 @@ typedef ${pascalCasePageName}Emit = Emitter<${blocState}>;
 
 class ${bloc} extends BaseBloc<${blocEvent}, ${blocState}> {
   ${bloc}() : super(const ${blocState}()) {
-    on<${blocEvent}>((event, emit) {});
+    on<Initialize>(_initialize);
   }
+
+  void _initialize(Initialize event, ${pascalCasePageName}Emit emit) {}
 }
 `;
 }
