@@ -87,7 +87,7 @@ class ${page} extends StatelessWidget {
       create: (context) => ${bloc}(),
       child: BlocProgress<${bloc}, ${blocState}, ${blocEvent}>(
         builder: (context) => const Scaffold(
-          appBar: TextAppBar(text: 'temp'),
+          appBar: PawdlyAppBar(title: 'temp'),
           body: ${view}(),
         ),
       ),
