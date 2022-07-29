@@ -98,7 +98,7 @@ async function generateBlocCode(
         createViewBarrelTemplate(pageName, viewDirectoryPath),
         createViewViewTemplate(pageName, viewDirectoryPath),
         createViewPageTemplate(pageName, viewDirectoryPath, isBase),
-        createBlocEventTemplate(pageName, blocDirectoryPath),
+        createBlocEventTemplate(pageName, blocDirectoryPath, isBase),
         createBlocStateTemplate(pageName, blocDirectoryPath, isBase),
         createBlocTemplate(pageName, blocDirectoryPath, isBase),
     ]);
@@ -225,7 +225,8 @@ function createViewPageTemplate(
 
 function createBlocEventTemplate(
     pageName: string,
-    targetDirectory: string
+    targetDirectory: string,
+    isBase: boolean,
 ) {
     const snakeCaseBlocName = changeCase.snakeCase(pageName);
     const targetPath = `${targetDirectory}/${snakeCaseBlocName}_event.dart`;
@@ -237,7 +238,7 @@ function createBlocEventTemplate(
     return new Promise<void>(async (resolve, reject) => {
         writeFile(
             targetPath,
-            getBlocEventTemplate(pageName),
+            getBlocEventTemplate(pageName, isBase),
             "utf8",
             (error) => {
                 if (error) {
