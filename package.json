@@ -10,8 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:flutter-ext.helloWorld",
-		"onCommand:flutter-ext.newPage"
+		"onCommand:flutter-ext.newPage",
+		"onCommand:flutter-ext.newModel"
 	],
 	"repository": {
 		"type": "git",
@@ -21,18 +21,22 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "flutter-ext.helloWorld",
-				"title": "Hello World"
-			},
-			{
 				"command": "flutter-ext.newPage",
 				"title": "FlutterExt: New Page"
+			},
+			{
+				"command": "flutter-ext.newModel",
+				"title": "FlutterExt: New Model"
 			}
 		],
 		"menus": {
 			"explorer/context": [
 				{
 					"command": "flutter-ext.newPage",
+					"when": "explorerResourceIsFolder"
+				},
+				{
+					"command": "flutter-ext.newModel",
 					"when": "explorerResourceIsFolder"
 				}
 			]
