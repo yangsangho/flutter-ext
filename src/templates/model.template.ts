@@ -1,12 +1,12 @@
 import * as changeCase from "change-case";
 
 export function getModelTemplate(modelName: string): string {
-    const pascalCaseModelName = changeCase.pascalCase(modelName);
-    const snakeCasePageName = changeCase.snakeCase(modelName);
+  const pascalCaseModelName = changeCase.pascalCase(modelName);
+  const snakeCasePageName = changeCase.snakeCase(modelName);
 
-    return `import 'package:equatable/equatable.dart';
+  return `import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pawdly_api/src/common/json_map.dart';
+import 'package:pawdly_api/src/model/model.dart';
 
 part '${snakeCasePageName}.g.dart';
 
