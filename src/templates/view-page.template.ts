@@ -41,7 +41,7 @@ class ${page} extends StatelessWidget {
     return BlocProvider(
       create: (context) => ${bloc}(),
       child: const Scaffold(
-        appBar: TextAppBar(text: 'temp'),
+        appBar: PawdlyAppBar(title: 'temp'),
         body: ${view}(),
       ),
     );
@@ -60,11 +60,11 @@ function getBaseViewPageTemplate(pageName: string): string {
   const blocState = `${pascalCasePageName}State`;
   const blocEvent = `${pascalCasePageName}Event`;
 
-  return `import 'package:common_bloc/common_bloc.dart';
-import 'package:flutter/material.dart';
+  return `import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pawdly_ui/pawdly_ui.dart';
+import 'package:pawdly_util/pawdly_util.dart';
 
 import '../${snakeCasePageName}.dart';
 

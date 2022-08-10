@@ -40,9 +40,9 @@ function getBaseBlocTemplate(pageName: string): string {
   const blocState = `${pascalCasePageName}State`;
   const blocEvent = `${pascalCasePageName}Event`;
 
-  return `import 'package:common_bloc/common_bloc.dart';
-import 'package:equatable/equatable.dart';
+  return `import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pawdly_util/pawdly_util.dart';
 
 part '${snakeCasePageName}_event.dart';
 part '${snakeCasePageName}_state.dart';
@@ -50,7 +50,11 @@ part '${snakeCasePageName}_state.dart';
 typedef ${pascalCasePageName}Emit = Emitter<${blocState}>;
 
 class ${bloc} extends BaseBloc<${blocEvent}, ${blocState}> {
-  ${bloc}() : super(const ${blocState}()) {
+  ${bloc}()
+      : super(
+        const ${blocState}(),
+        requiredInitializeEventNameList: [],
+      ) {
     on<Initialize>(_initialize);
   }
 
