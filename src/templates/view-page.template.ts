@@ -26,7 +26,7 @@ import '../${snakeCasePageName}.dart';
 class ${page} extends StatelessWidget {
   const ${page}._({Key? key}) : super(key: key);
 
-  static String get _routePath => 'temp';
+  static const String _routePath = 'temp';
 
   static GoRoute get route => GoRoute(
         path: _routePath,
@@ -71,7 +71,7 @@ import '../${snakeCasePageName}.dart';
 class ${page} extends StatelessWidget {
   const ${page}._({Key? key}) : super(key: key);
 
-  static String get _routePath => 'temp';
+  static const String _routePath = 'temp';
 
   static GoRoute get route => GoRoute(
         path: _routePath,
