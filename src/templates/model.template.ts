@@ -6,17 +6,13 @@ export function getModelTemplate(modelName: string): string {
 
   return `import 'package:json_annotation/json_annotation.dart';
 
-import '../../model/json_map.dart';
-
 part '${snakeCasePageName}.g.dart';
 
 @JsonSerializable()
 class ${pascalCaseModelName} {
 
-  const ${pascalCaseModelName}();
-
-  factory ${pascalCaseModelName}.fromJson(JsonMap json) => _$${pascalCaseModelName}FromJson(json);
-  JsonMap toJson() => _$${pascalCaseModelName}ToJson(this);
+  factory ${pascalCaseModelName}.fromJson(Map<String, dynamic> json) => _$${pascalCaseModelName}FromJson(json);
+  Map<String, dynamic> toJson() => _$${pascalCaseModelName}ToJson(this);
 }
 `;
 }
