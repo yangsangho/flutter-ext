@@ -40,9 +40,9 @@ function getBaseBlocTemplate(pageName: string): string {
   const blocState = `${pascalCasePageName}State`;
   const blocEvent = `${pascalCasePageName}Event`;
 
-  return `import 'package:base_bloc/base_bloc.dart';
-import 'package:equatable/equatable.dart';
+  return `import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pawdly_util/pawdly_util.dart';
 
 part '${snakeCasePageName}_event.dart';
 part '${snakeCasePageName}_state.dart';

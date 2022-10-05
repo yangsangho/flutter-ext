@@ -1,0 +1,24 @@
+{
+    "BlocRequestFunction": {
+        "prefix": "listenRequest",
+        "body": [
+            "void _onListenRequest(BuildContext context, ${1:Subject}State state) {",
+            "\tif (state.request.type == null) return;",
+            "\tswitch (state.request.type!) {",
+            "\t}",
+            "}"
+        ]
+    },
+    "BlocListenWhen": {
+        "prefix": "listenWhen",
+        "body": [
+            "listenWhen: (previous, current) => previous.${1:request} != current.$1,"
+        ]
+    },
+    "BlocBuildWhen": {
+        "prefix": "buildWhen",
+        "body": [
+            "buildWhen: (previous, current) => previous.${1:request} != current.$1,"
+        ]
+    }
+}

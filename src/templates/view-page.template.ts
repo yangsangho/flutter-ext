@@ -60,8 +60,7 @@ function getBaseViewPageTemplate(pageName: string): string {
   const blocState = `${pascalCasePageName}State`;
   const blocEvent = `${pascalCasePageName}Event`;
 
-  return `import 'package:base_bloc/base_bloc.dart';
-import 'package:flutter/material.dart';
+  return `import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pawdly_ui/pawdly_ui.dart';
@@ -86,7 +85,7 @@ class ${page} extends StatelessWidget {
     return BlocProvider(
       create: (context) => ${bloc}(),
       child: BlocProgress<${bloc}, ${blocState}, ${blocEvent}>(
-        builder: (context) => const Scaffold(
+        builder: (context, state) => const Scaffold(
           appBar: PawdlyAppBar(title: 'temp'),
           body: ${view}(),
         ),
