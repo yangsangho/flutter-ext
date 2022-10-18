@@ -18,7 +18,7 @@
         "body": [
             "import 'package:flutter/material.dart';\n",
             "class ${1:name} extends StatelessWidget {",
-            "\tconst ${1:name}({Key? key}) : super(key: key);\n",
+            "\tconst ${1:name}({super.key});\n",
             "\t@override",
             "\tWidget build(BuildContext context) {",
             "\t\treturn Container();",

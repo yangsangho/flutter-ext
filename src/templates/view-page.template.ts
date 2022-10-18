@@ -67,7 +67,7 @@ import 'package:pawdly_ui/pawdly_ui.dart';
 import '../${snakeCasePageName}.dart';
 
 class ${page} extends StatelessWidget {
-  const ${page}._({Key? key}) : super(key: key);
+  const ${page}._({super.key});
 
   static const String _routePath = '/temp';
 
