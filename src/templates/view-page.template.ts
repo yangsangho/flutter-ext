@@ -26,15 +26,14 @@ import '../${snakeCasePageName}.dart';
 class ${page} extends StatelessWidget {
   const ${page}._({Key? key}) : super(key: key);
 
-  static const String _routePath = 'temp';
+  static const String _routePath = '/temp';
 
   static GoRoute get route => GoRoute(
         path: _routePath,
         builder: (context, state) => const ${page}._(),
       );
 
-  static String getRoutePath(BuildContext context) =>
-      '\${GoRouter.of(context).location}/$_routePath';
+  static void push(BuildContext context) => context.push(_routePath);
 
   @override
   Widget build(BuildContext context) {
@@ -70,15 +69,14 @@ import '../${snakeCasePageName}.dart';
 class ${page} extends StatelessWidget {
   const ${page}._({Key? key}) : super(key: key);
 
-  static const String _routePath = 'temp';
+  static const String _routePath = '/temp';
 
   static GoRoute get route => GoRoute(
         path: _routePath,
         builder: (context, state) => const ${page}._(),
       );
 
-  static String getRoutePath(BuildContext context) =>
-      '\${GoRouter.of(context).location}/$_routePath';
+  static void push(BuildContext context) => context.push(_routePath);
 
   @override
   Widget build(BuildContext context) {
