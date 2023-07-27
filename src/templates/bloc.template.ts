@@ -53,7 +53,7 @@ class ${bloc} extends BaseBloc<${blocEvent}, ${blocState}> {
   ${bloc}()
       : super(
         const ${blocState}(),
-        requiredInitializeEventNameList: [],
+        requiredInitializeEventTypeList: [],
       ) {
     on<Initialize>(_initialize);
   }

@@ -18,29 +18,19 @@ function getDefaultViewPageTemplate(pageName: string): string {
 
   return `import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:pawdly_ui/pawdly_ui.dart';
+import 'package:monong_ui/monong_ui.dart';
 
 import '../${snakeCasePageName}.dart';
 
 class ${page} extends StatelessWidget {
   const ${page}._({Key? key}) : super(key: key);
 
-  static const String _routePath = '/temp';
-
-  static GoRoute get route => GoRoute(
-        path: _routePath,
-        builder: (context, state) => const ${page}._(),
-      );
-
-  static void push(BuildContext context) => context.push(_routePath);
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ${bloc}(),
       child: const Scaffold(
-        appBar: PawdlyAppBar(title: 'temp'),
+        appBar: MonongAppBar(title: 'temp'),
         body: ${view}(),
       ),
     );
@@ -61,22 +51,12 @@ function getBaseViewPageTemplate(pageName: string): string {
 
   return `import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:pawdly_ui/pawdly_ui.dart';
+import 'package:monong_ui/monong_ui.dart';
 
 import '../${snakeCasePageName}.dart';
 
 class ${page} extends StatelessWidget {
   const ${page}._({super.key});
-
-  static const String _routePath = '/temp';
-
-  static GoRoute get route => GoRoute(
-        path: _routePath,
-        builder: (context, state) => const ${page}._(),
-      );
-
-  static void push(BuildContext context) => context.push(_routePath);
 
   @override
   Widget build(BuildContext context) {

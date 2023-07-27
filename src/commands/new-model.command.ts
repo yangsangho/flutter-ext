@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import * as changeCase from "change-case";
+import * as mkdirp from "mkdirp";
 
 import {
     InputBoxOptions,
@@ -28,10 +29,15 @@ export const newModel = async (uri: Uri) => {
         targetDirectory = uri.fsPath;
     }
 
+    const targetDirectoryPath = `${targetDirectory}/${modelName}`;
+    if (!existsSync(targetDirectoryPath)) {
+        await createDirectory(targetDirectoryPath);
+    }
+
     const pascalCaseModelName = changeCase.pascalCase(modelName);
 
     try {
-        await createModelTemplate(modelName, targetDirectory);
+        await createModelTemplate(modelName, targetDirectoryPath);
         window.showInformationMessage(
             `Successfully Generated ${pascalCaseModelName} Model`
         );
@@ -90,5 +96,16 @@ function createModelTemplate(
                 resolve();
             }
         );
+    });
+}
+
+function createDirectory(targetDirectory: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        mkdirp(targetDirectory, (error) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve();
+        });
     });
 }
