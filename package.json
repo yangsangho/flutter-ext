@@ -2,7 +2,7 @@
 	"name": "flutter-ext",
 	"displayName": "Flutter-Ext",
 	"description": "reduce boilerplate",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.69.0"
 	},
@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:flutter-ext.newPage",
+		"onCommand:flutter-ext.newView",
 		"onCommand:flutter-ext.newModel"
 	],
 	"repository": {
@@ -21,8 +21,8 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "flutter-ext.newPage",
-				"title": "FlutterExt: New Page"
+				"command": "flutter-ext.newView",
+				"title": "FlutterExt: New View"
 			},
 			{
 				"command": "flutter-ext.newModel",
@@ -32,7 +32,7 @@
 		"menus": {
 			"explorer/context": [
 				{
-					"command": "flutter-ext.newPage",
+					"command": "flutter-ext.newView",
 					"when": "explorerResourceIsFolder"
 				},
 				{

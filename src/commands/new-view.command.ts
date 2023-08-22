@@ -9,12 +9,13 @@ import {
     window,
 } from "vscode";
 import { existsSync, lstatSync, writeFile } from "fs";
-import { getModelTemplate } from "../templates/model.template";
+import { getViewTemplate } from "../templates/view.template";
+import { getViewModelTemplate } from "../templates/view-model.template";
 
-export const newModel = async (uri: Uri) => {
-    const modelName = await promptForModelName();
-    if (_.isNil(modelName) || modelName.trim() === "") {
-        window.showErrorMessage("The model name must not be empty");
+export const newView = async (uri: Uri) => {
+    const viewName = await promptForViewName();
+    if (_.isNil(viewName) || viewName.trim() === "") {
+        window.showErrorMessage("The view name must not be empty");
         return;
     }
 
@@ -29,17 +30,18 @@ export const newModel = async (uri: Uri) => {
         targetDirectory = uri.fsPath;
     }
 
-    const targetDirectoryPath = `${targetDirectory}/${modelName}`;
+    const targetDirectoryPath = `${targetDirectory}/${viewName}`;
     if (!existsSync(targetDirectoryPath)) {
         await createDirectory(targetDirectoryPath);
     }
 
-    const pascalCaseModelName = changeCase.pascalCase(modelName);
-
     try {
-        await createModelTemplate(modelName, targetDirectoryPath);
+        await createViewTemplate(viewName, targetDirectoryPath);
+        await createViewModelTemplate(viewName, targetDirectoryPath);
+
+        const pascalCaseViewlName = changeCase.pascalCase(viewName);
         window.showInformationMessage(
-            `Successfully Generated ${pascalCaseModelName} Model`
+            `Successfully Generated ${pascalCaseViewlName} View`
         );
     } catch (error) {
         window.showErrorMessage(
@@ -49,18 +51,18 @@ export const newModel = async (uri: Uri) => {
     }
 };
 
-function promptForModelName(): Thenable<string | undefined> {
-    const modelNamePromptOptions: InputBoxOptions = {
-        prompt: "Model Name",
+function promptForViewName(): Thenable<string | undefined> {
+    const viewNamePromptOptions: InputBoxOptions = {
+        prompt: "View Name(snake case)",
         placeHolder: "group_user",
     };
-    return window.showInputBox(modelNamePromptOptions);
+    return window.showInputBox(viewNamePromptOptions);
 }
 
 async function promptForTargetDirectory(): Promise<string | undefined> {
     const options: OpenDialogOptions = {
         canSelectMany: false,
-        openLabel: "Select a folder to create the model in",
+        openLabel: "Select a folder to create the view in",
         canSelectFolders: true,
     };
 
@@ -72,12 +74,12 @@ async function promptForTargetDirectory(): Promise<string | undefined> {
     });
 }
 
-function createModelTemplate(
-    modelName: string,
+function createViewTemplate(
+    viewName: string,
     targetDirectory: string
 ) {
-    const snakeCaseModelName = changeCase.snakeCase(modelName);
-    const targetPath = `${targetDirectory}/${snakeCaseModelName}.dart`;
+    const snakeCaseViewName = changeCase.snakeCase(viewName);
+    const targetPath = `${targetDirectory}/${snakeCaseViewName}_view.dart`;
 
     if (existsSync(targetPath)) {
         throw Error(`${targetPath} already exists`);
@@ -86,7 +88,7 @@ function createModelTemplate(
     return new Promise<void>(async (resolve, reject) => {
         writeFile(
             targetPath,
-            getModelTemplate(modelName),
+            getViewTemplate(viewName + '_view', viewName + '_view_model'),
             "utf8",
             (error) => {
                 if (error) {
@@ -98,6 +100,34 @@ function createModelTemplate(
         );
     });
 }
+
+function createViewModelTemplate(
+    viewName: string,
+    targetDirectory: string
+) {
+    const snakeCaseViewName = changeCase.snakeCase(viewName);
+    const targetPath = `${targetDirectory}/${snakeCaseViewName}_view_model.dart`;
+
+    if (existsSync(targetPath)) {
+        throw Error(`${targetPath} already exists`);
+    }
+
+    return new Promise<void>(async (resolve, reject) => {
+        writeFile(
+            targetPath,
+            getViewModelTemplate(viewName + '_view_model'),
+            "utf8",
+            (error) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve();
+            }
+        );
+    });
+}
+
 
 function createDirectory(targetDirectory: string): Promise<void> {
     return new Promise((resolve, reject) => {
