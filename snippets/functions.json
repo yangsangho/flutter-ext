@@ -1,24 +1,14 @@
 {
-    "BlocRequestFunction": {
-        "prefix": "listenRequest",
+    "MediaQuery.size": {
+        "prefix": "mqs",
         "body": [
-            "void _onListenRequest(BuildContext context, ${1:Subject}State state) {",
-            "\tif (state.request.type == null) return;",
-            "\tswitch (state.request.type!) {",
-            "\t}",
-            "}"
+            "final Size size = MediaQuery.of(context).size;"
         ]
     },
-    "BlocListenWhen": {
-        "prefix": "listenWhen",
+    "ThemeData": {
+        "prefix": "thm",
         "body": [
-            "listenWhen: (previous, current) => previous.${1:request} != current.$1,"
-        ]
-    },
-    "BlocBuildWhen": {
-        "prefix": "buildWhen",
-        "body": [
-            "buildWhen: (previous, current) => previous.${1:request} != current.$1,"
+            "final ThemeData theme = Theme.of(context);"
         ]
     }
 }
