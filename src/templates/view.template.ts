@@ -1,9 +1,10 @@
-import * as changeCase from "change-case";
-
-export function getViewTemplate(viewName: string, viewModelName: string): string {
-  const pascalCaseViewName = changeCase.pascalCase(viewName);
-  const pascalCaseViewModelName = changeCase.pascalCase(viewModelName);
-  const snakeCaseViewModelName = changeCase.snakeCase(viewModelName);
+export function getViewTemplate(
+  snakeViewlName: string,
+  pascalViewName: string,
+): string {
+  const pascalCaseViewName = `${pascalViewName}View`;
+  const pascalCaseViewModelName = `${pascalViewName}ViewModel`;
+  const snakeCaseViewModelName = `${snakeViewlName}_view_model`;
 
   return `import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,7 +1,7 @@
-import * as changeCase from "change-case";
-
-export function getViewModelTemplate(viewModelName: string): string {
-  const pascalCaseViewModelName = changeCase.pascalCase(viewModelName);
+export function getViewModelTemplate(
+  pascalViewName: string,
+): string {
+  const pascalCaseViewModelName = `${pascalViewName}ViewModel`;
 
   return `import 'package:get/get.dart';
 

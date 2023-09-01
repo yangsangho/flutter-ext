@@ -1,23 +1,21 @@
-import * as changeCase from "change-case";
-
-export function getModelTemplate(modelName: string): string {
-  const pascalCaseModelName = changeCase.pascalCase(modelName);
-  const snakeCaseModelName = changeCase.snakeCase(modelName);
+export function getModelTemplate(
+  snakeModelName: string,
+  pascalModelName: string,
+): string {
 
   return `import 'package:freezed_annotation/freezed_annotation.dart';
 
-part '${snakeCaseModelName}.freezed.dart';
-
-part '${snakeCaseModelName}.g.dart';
+part '${snakeModelName}.freezed.dart';
+part '${snakeModelName}.g.dart';
 
 @freezed
-class ${pascalCaseModelName} with _$${pascalCaseModelName} {
-  const factory ${pascalCaseModelName}({
+class ${pascalModelName} with _$${pascalModelName} {
+  const factory ${pascalModelName}({
     required String example,
-  }) = _${pascalCaseModelName};
+  }) = _${pascalModelName};
 
-  factory ${pascalCaseModelName}.fromJson(Map<String, dynamic> json) =>
-      _$${pascalCaseModelName}FromJson(json);
+  factory ${pascalModelName}.fromJson(Map<String, dynamic> json) =>
+      _$${pascalModelName}FromJson(json);
 }
 `;
 }

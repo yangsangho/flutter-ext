@@ -2,7 +2,7 @@
 	"name": "flutter-ext",
 	"displayName": "Flutter-Ext",
 	"description": "reduce boilerplate",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"engines": {
 		"vscode": "^1.81.0"
 	},
@@ -24,6 +24,10 @@
 			{
 				"command": "flutter-ext.newModel",
 				"title": "FlutterExt: New Model"
+			},
+			{
+				"command": "flutter-ext.newWidget",
+				"title": "FlutterExt: New Widget"
 			}
 		],
 		"menus": {
@@ -34,6 +38,10 @@
 				},
 				{
 					"command": "flutter-ext.newModel",
+					"when": "explorerResourceIsFolder"
+				},
+				{
+					"command": "flutter-ext.newWidget",
 					"when": "explorerResourceIsFolder"
 				}
 			]
